@@ -18,10 +18,10 @@ class ApplicationController < Sinatra::Base
 
 # separate redirects for successful and unsuccessful signups
   post "/signup" do
-    user = User.new(params)
-    if user.username.blank? || user.password.blank?
+    if params[:username] == "" || params[:password] == ""
       redirect '/failure'
     else
+      User.create(params)
       redirect '/login'
     end
   end
